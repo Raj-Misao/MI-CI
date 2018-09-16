@@ -68,7 +68,12 @@ $route['updateUser'] = 'User/updateUser';
 $route['create'] = 'Post/create';
 $route['postIndex'] = 'Post';
 $route['createPost'] = 'Post/insertPosts';
+$route['postAjaxData'] = 'Post/postAjaxData';
 $route['post/edit/(:num)'] = 'Post/updatePosts/$1';
 $route['post/delete/(:num)'] = 'Post/deletePosts/$1';
+// EXCEL OPERTATION
+$route['excel_import'] = 'ExcelC/excel_import';
+$route['import_data'] = 'ExcelC/import_data';
+$route['export_data'] = 'ExcelC/export_data';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

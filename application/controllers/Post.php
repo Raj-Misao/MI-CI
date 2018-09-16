@@ -14,6 +14,13 @@ class Post extends CI_Controller {
     public function index()
     {
         $Post = $this->Curd_Model->getAll('posts');
+        // echo "<pre>";
+        // foreach($Post as $aaaa)
+        // {
+        //     print_r($aaaa);
+        // }
+        
+        // echo "</pre>";
         $this->load->view('layout/header.php');
         $this->load->view('layout/nav.php');
         $this->load->view('postIndex.php',compact('Post'));
@@ -30,11 +37,11 @@ class Post extends CI_Controller {
 	public function insertPosts()
 	{
         $this->form_validation->set_rules('title','error-title',
-        'trim|required|min_length[3]|max_length[5]|alpha',
+        'trim|required|min_length[3]|max_length[15]|alpha',
         array('required'=>'Please enter TTitle!','alpha'=>'Only alphabets please!')
         );
         $this->form_validation->set_rules('body','error-body',
-        'trim|required|min_length[3]|max_length[5]|alpha',
+        'trim|required|min_length[3]|max_length[15]|alpha',
         array('required'=>'Please enter BBody!','alpha'=>'Only alphabets please!')
         );
         if($this->form_validation->run() == FALSE)
@@ -45,11 +52,18 @@ class Post extends CI_Controller {
             $this->load->view('layout/footer.php');
         }
         else {
+            // echo "<pre>";
+            // $data = $this->input->post(); 
+            // print_r($data ); 
             $data = array(
              'title'=> $this->input->post('title'),
              'body'=>$this->input->post('body'),
             );
-            $result = $this->Curd_Model->insert('posts',$data);
+            //  print_r($data ); 
+            // echo "<pre>";
+            
+            
+           $result = $this->Curd_Model->insert('posts',$data);
             if($result)
             {
                 echo "Insert Successfully";
@@ -65,6 +79,12 @@ class Post extends CI_Controller {
 	public function getPosts()
 	{
         $Post = $this->Curd_Model->getAll('posts');
+        print_r($Post);
+	}
+	public function postAjaxData()
+	{
+        $Post = $this->Curd_Model->postAjaxData('posts');
+        echo '<pre>';
         print_r($Post);
 	}
 	
@@ -90,12 +110,12 @@ class Post extends CI_Controller {
         if($this->input->post())
         {
             $this->form_validation->set_rules('title','error-title',
-            'trim|required|min_length[3]|max_length[5]|alpha',
-            array('required'=>'Please enter TTitle!','alpha'=>'Only alphabets please!')
+            'trim|required|min_length[3]|max_length[15]',
+            array('required'=>'Please enter TTitle!')
             );
             $this->form_validation->set_rules('body','error-body',
-            'trim|required|min_length[3]|max_length[5]|alpha',
-            array('required'=>'Please enter BBody!','alpha'=>'Only alphabets please!')
+            'trim|required|min_length[3]|max_length[15]',
+            array('required'=>'Please enter BBody!')
             );
             if($this->form_validation->run() == FALSE)
             {
